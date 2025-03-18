@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id               String    @id @default(cuid())
+  name             String?
+  email            String    @unique
+  password         String
+  role             Role      @default(USER)
+  emailVerified    DateTime?
+  image            String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  lastLogin        DateTime?
+  isActive         Boolean   @default(true)
+  resetToken       String?   @unique
+  resetTokenExpiry DateTime?
+  twoFactorSecret  String?
+  twoFactorEnabled Boolean   @default(false)
+  lastLoginAt      DateTime?
+  novels           Novel[]
+}
+
+model Novel {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  authorId    String
+  coverImage  String?
+  chapters    Chapter[]
+  author      User      @relation(fields: [authorId], references: [id])
+}
+
+model Chapter {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  novelId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  novel     Novel    @relation(fields: [novelId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
