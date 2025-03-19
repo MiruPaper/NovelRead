@@ -28,7 +28,6 @@
     "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
-    "@types/mongoose": "^5.11.97",
     "nodemon": "^2.0.22",
     "ts-node": "^10.9.2",
     "typescript": "^5.0.3"
