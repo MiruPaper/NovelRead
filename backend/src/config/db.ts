@@ -7,9 +7,6 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/novel-
 
 export const connectDB = async () => {
   try {
-    // Use the static method to set the connection options
-    mongoose.set('strictQuery', false); // Depending on your needs
-    
     // Connect using the global connection instance
     const conn = await mongoose.connect(MONGODB_URI);
     
