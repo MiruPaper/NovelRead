@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+// Fix for Mongoose TypeScript compatibility
+import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
